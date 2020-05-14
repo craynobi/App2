@@ -1,1 +1,26 @@
 <slide></slide>
+<div class="row mt-2">
+  <div class="col-md-6">
+    <h4 style="color: #f840c8 !important">Son</h4>
+  </div>
+</div>
+<hr />
+<div class="row" *ngIf="user">
+  <div *ngFor="let a of user" class="col-lg-4 col-md-6 mb-4 position-relative">
+    <div class="card h-100">
+      <a (click)="goView(a.giamua)" style="cursor:pointer"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a (click)="goView(a.giamua)" style="cursor:pointer">{{a.tenSP}}</a>
+        </h4>
+        <h4>{{a.giasale}}$</h4>
+        <h5>{{a.giamua}}$</h5>
+        <p class="card-text">{{a.tenPhu}}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">★ ★ ★ ★ ☆</small>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
