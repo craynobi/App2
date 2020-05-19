@@ -6,8 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CounterComponent } from './content/counter/counter.component';
 import { FetchDataComponent } from './content/fetch-data/fetch-data.component';
 import { FooterComponent } from './content/footer/footer.component';
-//import { SlideComponent } from './content/slidehome/slide.component';
-
+import { ContactComponent } from './content/contact/contact.component';
 
 const routesConfig: Routes = [
   //patch add defaut
@@ -15,7 +14,7 @@ const routesConfig: Routes = [
   { path: 'product', component: CounterComponent },
   { path: 'buyproduct', component: FetchDataComponent },
   { path: 'newlist', component: FetchDataComponent },
-  { path: 'call', component: FetchDataComponent },
+  { path: 'call', component: ContactComponent },
   { path: '**', loadChildren: () => import('./content/home/home-routing.module').then(m => m.HomeRoutingModule)}
 ]
 
@@ -24,7 +23,7 @@ const routesConfig: Routes = [
     CounterComponent,
     FetchDataComponent,
     FooterComponent,
-   // SlideComponent
+    ContactComponent
   ],
   imports: [
     CommonModule,

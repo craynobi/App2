@@ -141,59 +141,47 @@ public class DatabaseHelper : IDisposable
 
     public string LookUpTable(string pSQLCommand, string pFieldReturn)
     {
-        try
+        DataRow dtRow;
+        dtRow = GetDataRow(pSQLCommand);
+        if (dtRow != null)
         {
-            DataRow dtRow;
-            dtRow = GetDataRow(pSQLCommand);
-            if (dtRow != null)
-            {
-                return Convert.ToString(dtRow[pFieldReturn]).Trim();
-            }
-            return "";
+            return Convert.ToString(dtRow[pFieldReturn]).Trim();
         }
-        catch (SqlException Ex)
-        {
-            return "";
-        }
+        return "";
     }
 
 
     private void connectDB(string connectionstring, Providers provider)
     {
-        try
+        strConnectionString = connectionstring;
+        switch (provider)
         {
-            strConnectionString = connectionstring;
-            switch (provider)
-            {
-                case Providers.SqlServer:
-                    objFactory = SqlClientFactory.Instance;
-                    break;
-                case Providers.ConfigDefined:
-                    string providername = connectionstring;
-                    switch (providername)
-                    {
-                        case "System.Data.SqlClient":
-                            objFactory = SqlClientFactory.Instance;
-                            break;
+            case Providers.SqlServer:
+                objFactory = SqlClientFactory.Instance;
+                break;
+            case Providers.ConfigDefined:
+                string providername = connectionstring;
+                switch (providername)
+                {
+                    case "System.Data.SqlClient":
+                        objFactory = SqlClientFactory.Instance;
+                        break;
 
-                        default:
-                            objFactory = SqlClientFactory.Instance;
-                            break;
-                    }
-                    break;
+                    default:
+                        objFactory = SqlClientFactory.Instance;
+                        break;
+                }
+                break;
 
-            }
-            objConnection = objFactory.CreateConnection();
-            objCommand = objFactory.CreateCommand();
-            //Chinh sua tang thoi gian xuat excel khi goi store len 20 phut
-            objCommand.CommandTimeout = 1200;
-            objConnection.ConnectionString = strConnectionString;
-            objCommand.Connection = objConnection;
-            objCommand.Parameters.Clear();
         }
-        catch (Exception ex)
-        {
-        }
+        objConnection = objFactory.CreateConnection();
+        objCommand = objFactory.CreateCommand();
+        //Chinh sua tang thoi gian xuat excel khi goi store len 20 phut
+        objCommand.CommandTimeout = 1200;
+        objConnection.ConnectionString = strConnectionString;
+        objCommand.Connection = objConnection;
+        objCommand.Parameters.Clear();
+
     }
 
     public DatabaseHelper(Providers provider)
