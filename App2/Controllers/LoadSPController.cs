@@ -23,9 +23,11 @@ namespace App2.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public IEnumerable<ListSP> Get()
+        public IEnumerable<ListSP> Get(string id ="")
         {
-            DataTable dt = db.ExecuteDataTable("SELECT * FROM dbo.SP_info_list WITH (NOLOCK)");
+            db.ClearParameter();
+            db.AddParameter("@ID", id);
+            DataTable dt = db.ExecuteDataTable("Shop_Get_Product",CommandType.StoredProcedure,ConnectionState.CloseOnExit);
             List<ListSP> listEmployees = new List<ListSP>();
             foreach (DataRow dr in dt.Rows)
             {

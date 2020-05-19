@@ -2,27 +2,29 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { FooterComponent } from './footer/footer.component';
-import { SlideComponent } from './slidehome/slide.component';
+
+import { CounterComponent } from './content/counter/counter.component';
+import { FetchDataComponent } from './content/fetch-data/fetch-data.component';
+import { FooterComponent } from './content/footer/footer.component';
+//import { SlideComponent } from './content/slidehome/slide.component';
+
 
 const routesConfig: Routes = [
-//patch add defaut
- 
-  { path: 'counter', component: CounterComponent },
-  { path: 'fetch-data', component: FetchDataComponent },
-  { path: '**', component: HomeComponent }
+  //patch add defaut
+  { path: 'home', loadChildren: () => import('./content/home/home-routing.module').then(m => m.HomeRoutingModule) },
+  { path: 'product', component: CounterComponent },
+  { path: 'buyproduct', component: FetchDataComponent },
+  { path: 'newlist', component: FetchDataComponent },
+  { path: 'call', component: FetchDataComponent },
+  { path: '**', loadChildren: () => import('./content/home/home-routing.module').then(m => m.HomeRoutingModule)}
 ]
 
 @NgModule({
   declarations: [
-    HomeComponent,
     CounterComponent,
     FetchDataComponent,
     FooterComponent,
-    SlideComponent
+   // SlideComponent
   ],
   imports: [
     CommonModule,

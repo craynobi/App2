@@ -1,12 +1,12 @@
-import { Component,Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'full',
+  templateUrl: './full.component.html',
 })
-export class HomeComponent {
+export class FullListComponent {
   public user: ListUser[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: Router) {
@@ -15,11 +15,10 @@ export class HomeComponent {
     }, error => console.error(error));
   }
   public goView(id: string) {
-    this.router.navigate(['counter', { p1: id }]);
+    this.router.navigate(['home/detail', { id: id }]);
   }
 }
 
-//khai báo class hứng data
 interface ListUser {
   maSP: string;
   tenSP: string;
