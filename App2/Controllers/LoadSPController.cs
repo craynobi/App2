@@ -36,10 +36,10 @@ namespace App2.Controllers
                 arry.TenSP = dr["TenSP"].ToString();
                 arry.TenSPKoDau = dr["TenSPKoDau"].ToString();
                 arry.TenPhu = dr["TenPhu"].ToString();
-                arry.giamua = Convert.ToInt32(dr["GiaMua"].ToString());
-                arry.giasale = Convert.ToInt32(dr["GiaSale"].ToString());
-                arry.DateCreate = Convert.ToDateTime(dr["DateInsert"].ToString());
-                arry.UserCreate = dr["UserCreate"].ToString();
+                arry.giamua = Convert.ToInt32(dr["GiaMua"].ToString() == "" ? "0" : dr["GiaMua"].ToString());
+                arry.giasale = Convert.ToInt32(dr["GiaSale"].ToString() == "" ? "0" : dr["GiaSale"].ToString());
+                arry.DateCreate = Convert.ToDateTime(dr["NgayInsert"].ToString());
+                arry.UserCreate = dr["NguoiTao"].ToString();
                 listEmployees.Add(arry);
             }
             return listEmployees.ToArray();
