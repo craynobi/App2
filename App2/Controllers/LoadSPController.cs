@@ -23,15 +23,18 @@ namespace App2.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public IEnumerable<ListSP> Get(string id ="")
+        public IEnumerable<ListSP> Get(string id ="",int pageindex=1, int pagesize=100)
         {
             db.ClearParameter();
             db.AddParameter("@ID", id);
+            db.AddParameter("@PageIndex", pageindex);
+            db.AddParameter("@PageSize", pagesize);
             DataTable dt = db.ExecuteDataTable("Shop_Get_Product",CommandType.StoredProcedure,ConnectionState.CloseOnExit);
             List<ListSP> listEmployees = new List<ListSP>();
             foreach (DataRow dr in dt.Rows)
             {
                 ListSP arry = new ListSP();
+                arry.totalRow = Convert.ToInt32(dr["totalRows"].ToString());
                 arry.MaSP = dr["MaSP"].ToString();
                 arry.TenSP = dr["TenSP"].ToString();
                 arry.TenSPKoDau = dr["TenSPKoDau"].ToString();

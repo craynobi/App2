@@ -7,6 +7,8 @@ namespace App2.Model
 {
     public class ListSP
     {
+        public int rowID { get; set; }
+        public int totalRow { get; set; }
         public string MaSP { get; set; }
         public string TenSP { get; set; }
         public string TenSPKoDau { get; set; }
